@@ -431,6 +431,9 @@ public class StripeModule extends ReactContextBaseJavaModule {
 
     SourceParams sourceParams = extractSourceParams(options);
 
+    HashMap<String, String> newMap = new HashMap(options.getMap("metadata").toHashMap());
+    sourceParams.setMetaData(newMap);
+
     ArgCheck.nonNull(sourceParams);
 
     mStripe.createSource(sourceParams, new SourceCallback() {
