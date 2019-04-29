@@ -432,8 +432,11 @@ public class StripeModule extends ReactContextBaseJavaModule {
 
     SourceParams sourceParams = extractSourceParams(options);
 
-    HashMap<String, String> newMap = new HashMap(options.getMap("metadata").toHashMap());
-    sourceParams.setMetaData(newMap);
+    try {
+      ReadableMap metadata = options.getMap("metadata");
+      HashMap<String, String> newMap = new HashMap(metadata.toHashMap());
+      sourceParams.setMetaData(newMap);
+    } catch (Exception e) {}
 
     ArgCheck.nonNull(sourceParams);
 
